@@ -1,25 +1,30 @@
 // src/components/CharacterList.tsx
 
-import React from 'react';
-import { List, ListItem, ListItemText } from '@mui/material';
-
-interface Character {
-  name: string;
-  birth_year: string;
-  height: string;
-  mass: string;
-}
+import React from "react";
+import { List, ListItem, ListItemText } from "@mui/material";
+import { Character } from "../types/types";
+import { useNavigate } from "react-router-dom";
+import { extractIdFromUrl } from "../utils";
 
 interface CharacterListProps {
   characters: Character[];
-  onCharacterClick: (character: Character) => void;
 }
 
-const CharacterList: React.FC<CharacterListProps> = ({ characters, onCharacterClick }) => {
+const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
+  const navigate = useNavigate();
+
+  const handleCharacterClick = (character: Character) => {
+    console.log("Clicked character:", character);
+    navigate(`/character/${extractIdFromUrl(character.url)}`);
+  };
   return (
     <List>
       {characters.map((character, index) => (
-        <ListItem button key={index} onClick={() => onCharacterClick(character)}>
+        <ListItem
+          button
+          key={index}
+          onClick={() => handleCharacterClick(character)}
+        >
           <ListItemText primary={character.name} />
         </ListItem>
       ))}
