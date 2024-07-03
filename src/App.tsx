@@ -1,4 +1,22 @@
-import { useState } from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import CharacterPage from './pages/CharacterPage';
+
+const App: React.FC = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/character/:id" element={<CharacterPage />} />
+      </Routes>
+    </Router>
+  );
+};
+
+export default App;
+
+/*import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -32,4 +50,5 @@ function App() {
   )
 }
 
-export default App
+export default App*/
+
