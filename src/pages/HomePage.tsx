@@ -1,28 +1,17 @@
-import React, { useEffect } from 'react';
-import { Container, Typography, Grid } from '@mui/material';
+import React from 'react';
+import { Container, Typography, Grid, CircularProgress } from '@mui/material';
 import CharacterList from '../components/CharacterList';
-import { RootState } from '../store/configureStore'; // Updated path
-import { useDispatch, useSelector } from 'react-redux';
 import { fetchCharacters } from '../api/starWarsApi';
-import { setCharacters } from '../store/characterActions'; // Updated path
-import { Character } from '../types/types'; // Import Character interface
+import { useFetch } from '../hooks/useFetch';
+import { Character } from '../types/types';
+import ErrorMessage from '../components/ErrorMessage';
+
+interface CharacterResponse {
+  results: Character[];
+}
 
 const HomePage: React.FC = () => {
-  const characters = useSelector((state: RootState) => state.characters.characters);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    loadCharacters();
-  }, []);
-
-  const loadCharacters = async () => {
-    try {
-      const response = await fetchCharacters();
-      dispatch(setCharacters(response.results));
-    } catch (error) {
-      console.error('Error loading characters:', error);
-    }
-  };
+  const { data, loading, error } = useFetch<CharacterResponse>(fetchCharacters);
 
   const handleCharacterClick = (character: Character) => {
     console.log('Clicked character:', character);
@@ -33,11 +22,23 @@ const HomePage: React.FC = () => {
       <Typography variant="h3" gutterBottom>
         Star Wars Characters
       </Typography>
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <CharacterList characters={characters} onCharacterClick={handleCharacterClick} />
+      {loading && (
+        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+          <CircularProgress />
         </Grid>
-      </Grid>
+      )}
+      {error && (
+        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
+          <ErrorMessage message={error} />
+        </Grid>
+      )}
+      {!loading && !error && data && (
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <CharacterList characters={data.results} onCharacterClick={handleCharacterClick} />
+          </Grid>
+        </Grid>
+      )}
     </Container>
   );
 };
