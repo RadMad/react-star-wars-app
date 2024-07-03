@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Container, Typography, Grid, CircularProgress } from '@mui/material';
 import CharacterList from '../components/CharacterList';
 import { fetchCharacters } from '../api/starWarsApi';
 import { useFetch } from '../hooks/useFetch';
 import { Character } from '../types/types';
 import ErrorMessage from '../components/ErrorMessage';
-import { db } from '../db';
 
 interface CharacterResponse {
   results: Character[];
@@ -13,16 +12,6 @@ interface CharacterResponse {
 
 const HomePage: React.FC = () => {
   const { data, loading, error } = useFetch<CharacterResponse>(fetchCharacters);
-
-  useEffect(() => {
-    const saveCharactersToDB = async (characters: Character[]) => {
-      await db.characters.bulkPut(characters);
-    };
-
-    if (data) {
-      saveCharactersToDB(data.results);
-    }
-  }, [data]);
 
   return (
     <Container>
