@@ -1,13 +1,13 @@
 import { TextField } from '@mui/material';
 import { Controller, Control, FieldValues, Path } from 'react-hook-form';
 
-interface FormFieldProps<T extends FieldValues> {
+interface NumberFormFieldProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
   control: Control<T>;
 }
 
-const FormField = <T extends FieldValues>({ name, label, control }: FormFieldProps<T>) => {
+const NumberFormField = <T extends FieldValues>({ name, label, control }: NumberFormFieldProps<T>) => {
   return (
     <Controller
       name={name}
@@ -18,6 +18,9 @@ const FormField = <T extends FieldValues>({ name, label, control }: FormFieldPro
           variant="outlined"
           fullWidth
           margin="normal"
+          type="number"
+          autoComplete="off"
+          inputProps={{ min: 0, max: 700, step: 1 }}
           {...field}
         />
       )}
@@ -25,4 +28,4 @@ const FormField = <T extends FieldValues>({ name, label, control }: FormFieldPro
   );
 };
 
-export default FormField;
+export default NumberFormField;
