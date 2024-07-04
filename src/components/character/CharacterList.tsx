@@ -2,9 +2,9 @@
 
 import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
-import { Character } from "../types/types";
 import { useNavigate } from "react-router-dom";
-import { extractIdFromUrl } from "../utils";
+import { extractIdFromUrl } from "../../utils";
+import { Character } from "../../types/types";
 
 interface CharacterListProps {
   characters: Character[];

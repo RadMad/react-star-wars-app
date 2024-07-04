@@ -1,33 +1,27 @@
-import React from 'react';
-import { Container, Typography, Grid, CircularProgress } from '@mui/material';
-import CharacterList from '../components/CharacterList';
-import { fetchCharacters } from '../api/starWarsApi';
-import { useApiFetch } from '../hooks/useApiFetch';
-import { Character } from '../types/types';
-import ErrorMessage from '../components/ErrorMessage';
+import React from "react";
+import { Container, Typography, Grid } from "@mui/material";
+import { fetchCharacters } from "../api/starWarsApi";
+import { useApiFetch } from "../hooks/useApiFetch";
+import { Character } from "../types/types";
+import ErrorMessageContainer from "../components/common/ErrorMessageContainer";
+import LoadingSpinnerContainer from "../components/common/LoadingSpinnerContainer";
+import CharacterList from "../components/character/CharacterList";
 
 interface CharacterResponse {
   results: Character[];
 }
 
 const HomePage: React.FC = () => {
-  const { data, loading, error } = useApiFetch<CharacterResponse>(fetchCharacters);
+  const { data, loading, error } =
+    useApiFetch<CharacterResponse>(fetchCharacters);
 
   return (
     <Container>
       <Typography variant="h3" gutterBottom>
         Star Wars Characters
       </Typography>
-      {loading && (
-        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
-          <CircularProgress />
-        </Grid>
-      )}
-      {error && (
-        <Grid container justifyContent="center" alignItems="center" style={{ minHeight: '100vh' }}>
-          <ErrorMessage message={error} />
-        </Grid>
-      )}
+      {loading && <LoadingSpinnerContainer />}
+      {error && <ErrorMessageContainer message={error} />}
       {!loading && !error && data && (
         <Grid container spacing={2}>
           <Grid item xs={12}>

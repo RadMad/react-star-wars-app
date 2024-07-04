@@ -4,13 +4,13 @@ import {
   Typography,
   TextField,
   Button,
-  CircularProgress,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { Character } from "../types/types";
 import { db } from "../db";
 import useFetchCharacter from "../hooks/useFetchCharacter";
+import LoadingSpinnerContainer from "../components/common/LoadingSpinnerContainer";
 
 const CharacterPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,7 +34,7 @@ const CharacterPage: React.FC = () => {
         Character Details
       </Typography>
       {loading ? (
-        <CircularProgress />
+        <LoadingSpinnerContainer />
       ) : error ? (
         <Typography color="error">{error}</Typography>
       ) : (
