@@ -20,6 +20,7 @@ export const useApiFetch = <T>(apiCall: () => Promise<T>, dependencies: unknown[
     };
 
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 
   return { data, loading, error };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Container, Typography, Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { fetchCharacters } from "../api/starWarsApi";
 import { CharacterResponse } from "../types/types";
@@ -11,11 +11,15 @@ import PaginationControls from "../components/common/PaginationControls";
 import NoDataAvailable from "../components/common/NoDataAvailable";
 import useSearchHook from "../hooks/useSearchHook";
 import SearchInput from "../components/common/form/SearchInput";
+import Layout from "../components/common/Layout";
 
 const HomePage: React.FC = () => {
   const { searchQuery, handleSearchChange, applySearchQuery } = useSearchHook();
   const location = useLocation();
-  const query = useMemo(() => new URLSearchParams(location.search), [location.search]);
+  const query = useMemo(
+    () => new URLSearchParams(location.search),
+    [location.search]
+  );
 
   const [currentPage, setCurrentPage] = useState<number>(
     parseInt(query.get("page") || "1", 10)
@@ -50,38 +54,32 @@ const HomePage: React.FC = () => {
     (event: React.ChangeEvent<unknown>, newPage: number) => {
       setCurrentPage(newPage);
     },
-    []
+    [setCurrentPage]
   );
 
   return (
-    <Container style={{ maxWidth: "560px" }}>
+    <Layout>
       <Typography variant="h3" gutterBottom>
         Star Wars Characters
       </Typography>
       <SearchInput value={searchQuery} onChange={handleSearchChange} />
       {loading && <LoadingSpinner />}
       {error && <ErrorMessage message={error} />}
-      {charactersData && (
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            {charactersData.results.length > 0 ? (
-              <>
-                <CharacterList characters={charactersData.results} />
-                <PaginationControls
-                  count={Math.ceil(charactersData.count / 10)}
-                  page={currentPage}
-                  onChange={handlePageChange}
-                  color="primary"
-                  disabled={loading}
-                />
-              </>
-            ) : (
-              <NoDataAvailable />
-            )}
-          </Grid>
-        </Grid>
+      {charactersData && charactersData.results.length > 0 ? (
+        <>
+          <CharacterList characters={charactersData.results} />
+          <PaginationControls
+            count={Math.ceil(charactersData.count / 10)}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            disabled={loading}
+          />
+        </>
+      ) : (
+        <NoDataAvailable />
       )}
-    </Container>
+    </Layout>
   );
 };
 

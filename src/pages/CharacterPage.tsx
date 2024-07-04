@@ -1,9 +1,11 @@
-import { Container, Typography } from "@mui/material";
-import { useParams } from "react-router-dom";
-import useFetchCharacter from "../hooks/useFetchCharacter";
-import LoadingSpinner from "../components/common/LoadingSpinner";
-import CharacterForm from "../components/character/CharacterForm";
-import ErrorMessage from "../components/common/ErrorMessage";
+import React from 'react';
+import { Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import useFetchCharacter from '../hooks/useFetchCharacter';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import CharacterForm from '../components/character/CharacterForm';
+import ErrorMessage from '../components/common/ErrorMessage';
+import Layout from '../components/common/Layout';
 
 const CharacterPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,7 +13,7 @@ const CharacterPage: React.FC = () => {
   const { character, loading, error } = useFetchCharacter(characterId);
 
   return (
-    <Container style={{ maxWidth: "560px" }}>
+    <Layout>
       <Typography variant="h3" gutterBottom>
         Character Details
       </Typography>
@@ -20,11 +22,9 @@ const CharacterPage: React.FC = () => {
       ) : error ? (
         <ErrorMessage message={error} />
       ) : (
-        character && (
-          <CharacterForm character={character} characterId={characterId} />
-        )
+        character && <CharacterForm character={character} characterId={characterId} />
       )}
-    </Container>
+    </Layout>
   );
 };
 
