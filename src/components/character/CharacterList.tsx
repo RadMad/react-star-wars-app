@@ -6,8 +6,8 @@ import {
   ListItemText,
   Tooltip,
 } from "@mui/material";
-import { extractIdFromUrl } from "../../utils";
-import { Character } from "../../types/types";
+import { Character } from "@/types/types";
+import { extractIdFromUrl } from "@/utils";
 
 interface CharacterListProps {
   characters: Character[];

@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { fetchCharacters } from "@/api/starWarsApi";
@@ -13,7 +13,7 @@ import useSearchHook from "@/hooks/useSearchHook";
 import SearchInput from "@/components/common/form/SearchInput";
 import Layout from "@/components/common/Layout";
 
-const HomePage = () => {
+const HomePage: React.FC = () => {
   const { searchQuery, handleSearchChange, applySearchQuery } = useSearchHook();
   const location = useLocation();
   const query = useMemo(

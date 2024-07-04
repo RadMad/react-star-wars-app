@@ -1,11 +1,11 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import useFetchCharacter from '../hooks/useFetchCharacter';
-import LoadingSpinner from '../components/common/LoadingSpinner';
-import CharacterForm from '../components/character/CharacterForm';
-import ErrorMessage from '../components/common/ErrorMessage';
-import Layout from '../components/common/Layout';
+import useFetchCharacter from '@/hooks/useFetchCharacter';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import CharacterForm from '@/components/character/CharacterForm';
+import ErrorMessage from '@/components/common/ErrorMessage';
+import Layout from '@/components/common/Layout';
 
 const CharacterPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

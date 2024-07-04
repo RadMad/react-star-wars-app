@@ -1,10 +1,10 @@
 import React from "react";
 import { Button, Stack, Box } from "@mui/material";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Character } from "../../types/types";
-import { db } from "../../db";
-import StringFormField from "../common/form/StringFormField";
-import NumberFormField from "../common/form/NumberFormField";
+import { Character } from "@/types/types";
+import { db } from "@/db";
+import StringFormField from "@/components/common/form/StringFormField";
+import NumberFormField from "@/components/common/form/NumberFormField";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

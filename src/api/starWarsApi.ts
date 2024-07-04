@@ -1,4 +1,5 @@
-import { CharacterResponse, Character } from "../types/types";
+import { CharacterResponse, Character } from "@/types/types";
+
 
 const API_URL = "https://swapi.dev/api";
 
