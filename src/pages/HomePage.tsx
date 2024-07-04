@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
   }, [searchQuery, applySearchQuery, isFirstLoad]);
 
   const handlePageChange = useCallback(
-    (event: React.ChangeEvent<unknown>, newPage: number) => {
+    (_: React.ChangeEvent<unknown>, newPage: number) => {
       setCurrentPage(newPage);
     },
     [setCurrentPage]
