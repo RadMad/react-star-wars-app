@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
-import { fetchCharacters } from "../api/starWarsApi";
-import { CharacterResponse } from "../types/types";
-import ErrorMessage from "../components/common/ErrorMessage";
-import LoadingSpinner from "../components/common/LoadingSpinner";
-import CharacterList from "../components/character/CharacterList";
-import { useApiFetch } from "../hooks/useApiFetch";
-import PaginationControls from "../components/common/PaginationControls";
-import NoDataAvailable from "../components/common/NoDataAvailable";
-import useSearchHook from "../hooks/useSearchHook";
-import SearchInput from "../components/common/form/SearchInput";
-import Layout from "../components/common/Layout";
+import { fetchCharacters } from "@/api/starWarsApi";
+import { CharacterResponse } from "@/types/types";
+import ErrorMessage from "@/components/common/ErrorMessage";
+import LoadingSpinner from "@/components/common/LoadingSpinner";
+import CharacterList from "@/components/character/CharacterList";
+import { useApiFetch } from "@/hooks/useApiFetch";
+import PaginationControls from "@/components/common/PaginationControls";
+import NoDataAvailable from "@/components/common/NoDataAvailable";
+import useSearchHook from "@/hooks/useSearchHook";
+import SearchInput from "@/components/common/form/SearchInput";
+import Layout from "@/components/common/Layout";
 
-const HomePage: React.FC = () => {
+const HomePage = () => {
   const { searchQuery, handleSearchChange, applySearchQuery } = useSearchHook();
   const location = useLocation();
   const query = useMemo(
