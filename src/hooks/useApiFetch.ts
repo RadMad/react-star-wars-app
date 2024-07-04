@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useFetch = <T>(apiCall: () => Promise<T>) => {
+export const useApiFetch = <T>(apiCall: () => Promise<T>) => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

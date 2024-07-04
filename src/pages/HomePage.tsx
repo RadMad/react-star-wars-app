@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Typography, Grid, CircularProgress } from '@mui/material';
 import CharacterList from '../components/CharacterList';
 import { fetchCharacters } from '../api/starWarsApi';
-import { useFetch } from '../hooks/useFetch';
+import { useApiFetch } from '../hooks/useApiFetch';
 import { Character } from '../types/types';
 import ErrorMessage from '../components/ErrorMessage';
 
@@ -11,7 +11,7 @@ interface CharacterResponse {
 }
 
 const HomePage: React.FC = () => {
-  const { data, loading, error } = useFetch<CharacterResponse>(fetchCharacters);
+  const { data, loading, error } = useApiFetch<CharacterResponse>(fetchCharacters);
 
   return (
     <Container>
