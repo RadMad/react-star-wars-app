@@ -13,6 +13,7 @@ export interface Character {
 
 export interface CharacterResponse {
   results: Character[];
+  count: number;
 }
 
 export interface CharacterState {

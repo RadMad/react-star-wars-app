@@ -11,7 +11,7 @@ const CharacterPage: React.FC = () => {
   const { character, loading, error } = useFetchCharacter(characterId);
 
   return (
-    <Container>
+    <Container style={{ maxWidth: "560px" }}>
       <Typography variant="h3" gutterBottom>
         Character Details
       </Typography>

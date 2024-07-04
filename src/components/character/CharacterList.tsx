@@ -15,7 +15,7 @@ interface CharacterListProps {
 
 const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
   return (
-    <List style={{ maxWidth: "460px" }}>
+    <List>
       {characters.map((character, index) => (
         <Tooltip key={index} arrow title="Click to see details">
           <ListItem disablePadding>
