@@ -65,19 +65,23 @@ const HomePage: React.FC = () => {
       <SearchInput value={searchQuery} onChange={handleSearchChange} />
       {loading && <LoadingSpinner />}
       {error && <ErrorMessage message={error} />}
-      {charactersData && charactersData.results.length > 0 ? (
+      {!loading && (
         <>
-          <CharacterList characters={charactersData.results} />
-          <PaginationControls
-            count={Math.ceil(charactersData.count / 10)}
-            page={currentPage}
-            onChange={handlePageChange}
-            color="primary"
-            disabled={loading}
-          />
+          {charactersData && charactersData.results.length > 0 ? (
+            <>
+              <CharacterList characters={charactersData.results} />
+              <PaginationControls
+                count={Math.ceil(charactersData.count / 10)}
+                page={currentPage}
+                onChange={handlePageChange}
+                color="primary"
+                disabled={loading}
+              />
+            </>
+          ) : (
+            <NoDataAvailable />
+          )}
         </>
-      ) : (
-        <NoDataAvailable />
       )}
     </Layout>
   );

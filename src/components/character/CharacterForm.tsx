@@ -6,6 +6,8 @@ import { db } from "../../db";
 import StringFormField from "../common/form/StringFormField";
 import NumberFormField from "../common/form/NumberFormField";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 interface CharacterFormProps {
   character: Character;
@@ -23,8 +25,15 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
   const { isDirty } = formState;
 
   const onSubmit: SubmitHandler<Character> = async (data) => {
-    await db.characters.put({ ...data, id: characterId });
-    reset(data);
+    try {
+      await db.characters.put({ ...data, id: characterId });
+      reset(data);
+      toast.success("Character saved successfully!");
+    } catch (err) {
+      toast.error("Failed to save character.");
+      console.error(err);
+      throw err;
+    }
   };
 
   React.useEffect(() => {
@@ -33,14 +42,39 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <ToastContainer />
       <StringFormField<Character> name="name" label="Name" control={control} />
-      <NumberFormField<Character> name="height" label="Height" control={control} />
+      <NumberFormField<Character>
+        name="height"
+        label="Height"
+        control={control}
+      />
       <NumberFormField<Character> name="mass" label="Mass" control={control} />
-      <StringFormField<Character> name="hair_color" label="Hair Color" control={control} />
-      <StringFormField<Character> name="skin_color" label="Skin Color" control={control} />
-      <StringFormField<Character> name="eye_color" label="Eye Color" control={control} />
-      <StringFormField<Character> name="birth_year" label="Birth Year" control={control} />
-      <StringFormField<Character> name="gender" label="Gender" control={control} />
+      <StringFormField<Character>
+        name="hair_color"
+        label="Hair Color"
+        control={control}
+      />
+      <StringFormField<Character>
+        name="skin_color"
+        label="Skin Color"
+        control={control}
+      />
+      <StringFormField<Character>
+        name="eye_color"
+        label="Eye Color"
+        control={control}
+      />
+      <StringFormField<Character>
+        name="birth_year"
+        label="Birth Year"
+        control={control}
+      />
+      <StringFormField<Character>
+        name="gender"
+        label="Gender"
+        control={control}
+      />
 
       <Box display="flex" justifyContent="flex-end" mt={2}>
         <Stack direction="row" spacing={2}>
