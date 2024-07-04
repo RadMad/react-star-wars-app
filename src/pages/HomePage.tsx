@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { fetchCharacters } from "../api/starWarsApi";
@@ -15,7 +15,7 @@ import SearchInput from "../components/common/form/SearchInput";
 const HomePage: React.FC = () => {
   const { searchQuery, handleSearchChange, applySearchQuery } = useSearchHook();
   const location = useLocation();
-  const query = new URLSearchParams(location.search);
+  const query = useMemo(() => new URLSearchParams(location.search), [location.search]);
 
   const [currentPage, setCurrentPage] = useState<number>(
     parseInt(query.get("page") || "1", 10)
@@ -44,14 +44,14 @@ const HomePage: React.FC = () => {
     return () => {
       clearTimeout(handler);
     };
-  }, [searchQuery, applySearchQuery]);
+  }, [searchQuery, applySearchQuery, isFirstLoad]);
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    newPage: number
-  ) => {
-    setCurrentPage(newPage);
-  };
+  const handlePageChange = useCallback(
+    (event: React.ChangeEvent<unknown>, newPage: number) => {
+      setCurrentPage(newPage);
+    },
+    []
+  );
 
   return (
     <Container style={{ maxWidth: "560px" }}>

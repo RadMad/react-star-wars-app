@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 interface UseSearchHookOptions {
@@ -16,17 +16,17 @@ const useSearchHook = ({ initialSearchQuery = "" }: UseSearchHookOptions = {}) =
     setSearchQuery(query.get("search") || "");
   }, [query]);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(event.target.value);
-  };
+  }, []);
 
-  const updateSearchQuery = (newSearchQuery: string) => {
+  const updateSearchQuery = useCallback((newSearchQuery: string) => {
     setSearchQuery(newSearchQuery);
-  };
+  }, []);
 
-  const applySearchQuery = () => {
+  const applySearchQuery = useCallback(() => {
     navigate(`?search=${searchQuery}&page=1`, { replace: true });
-  };
+  }, [navigate, searchQuery]);
 
   return {
     searchQuery,
