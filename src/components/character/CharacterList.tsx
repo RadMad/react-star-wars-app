@@ -1,5 +1,3 @@
-// src/components/CharacterList.tsx
-
 import React from "react";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { useNavigate } from "react-router-dom";
