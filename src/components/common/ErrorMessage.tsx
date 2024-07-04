@@ -5,7 +5,7 @@ interface ErrorMessageProps {
   message: string;
 }
 
-const ErrorMessageContainer: React.FC<ErrorMessageProps> = ({ message }) => {
+const ErrorMessage: React.FC<ErrorMessageProps> = ({ message }) => {
   return (
     <Grid
       container
@@ -18,4 +18,4 @@ const ErrorMessageContainer: React.FC<ErrorMessageProps> = ({ message }) => {
   );
 };
 
-export default ErrorMessageContainer;
+export default ErrorMessage;

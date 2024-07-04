@@ -3,8 +3,8 @@ import { Container, Typography, Grid } from "@mui/material";
 import { fetchCharacters } from "../api/starWarsApi";
 import { useApiFetch } from "../hooks/useApiFetch";
 import { Character } from "../types/types";
-import ErrorMessageContainer from "../components/common/ErrorMessageContainer";
-import LoadingSpinnerContainer from "../components/common/LoadingSpinnerContainer";
+import ErrorMessage from "../components/common/ErrorMessage";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 import CharacterList from "../components/character/CharacterList";
 
 interface CharacterResponse {
@@ -20,8 +20,8 @@ const HomePage: React.FC = () => {
       <Typography variant="h3" gutterBottom>
         Star Wars Characters
       </Typography>
-      {loading && <LoadingSpinnerContainer />}
-      {error && <ErrorMessageContainer message={error} />}
+      {loading && <LoadingSpinner />}
+      {error && <ErrorMessage message={error} />}
       {!loading && !error && data && (
         <Grid container spacing={2}>
           <Grid item xs={12}>

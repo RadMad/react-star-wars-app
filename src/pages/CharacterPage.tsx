@@ -1,9 +1,9 @@
 import { Container, Typography } from "@mui/material";
 import { useParams } from "react-router-dom";
 import useFetchCharacter from "../hooks/useFetchCharacter";
-import LoadingSpinnerContainer from "../components/common/LoadingSpinnerContainer";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 import CharacterForm from "../components/character/CharacterForm";
-import ErrorMessageContainer from "../components/common/ErrorMessageContainer";
+import ErrorMessage from "../components/common/ErrorMessage";
 
 const CharacterPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,9 +16,9 @@ const CharacterPage: React.FC = () => {
         Character Details
       </Typography>
       {loading ? (
-        <LoadingSpinnerContainer />
+        <LoadingSpinner />
       ) : error ? (
-        <ErrorMessageContainer message={error} />
+        <ErrorMessage message={error} />
       ) : (
         character && (
           <CharacterForm character={character} characterId={characterId} />
