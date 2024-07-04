@@ -1,6 +1,11 @@
 import React from "react";
-import { List, ListItem, ListItemText } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import {
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Tooltip,
+} from "@mui/material";
 import { extractIdFromUrl } from "../../utils";
 import { Character } from "../../types/types";
 
@@ -9,22 +14,19 @@ interface CharacterListProps {
 }
 
 const CharacterList: React.FC<CharacterListProps> = ({ characters }) => {
-  const navigate = useNavigate();
-
-  const handleCharacterClick = (character: Character) => {
-    console.log("Clicked character:", character);
-    navigate(`/character/${extractIdFromUrl(character.url)}`);
-  };
   return (
-    <List>
+    <List style={{ maxWidth: "460px" }}>
       {characters.map((character, index) => (
-        <ListItem
-          button
-          key={index}
-          onClick={() => handleCharacterClick(character)}
-        >
-          <ListItemText primary={character.name} />
-        </ListItem>
+        <Tooltip key={index} arrow title="Click to see details">
+          <ListItem disablePadding>
+            <ListItemButton
+              component="a"
+              href={`/character/${extractIdFromUrl(character.url)}`}
+            >
+              <ListItemText primary={character.name} />
+            </ListItemButton>
+          </ListItem>
+        </Tooltip>
       ))}
     </List>
   );
