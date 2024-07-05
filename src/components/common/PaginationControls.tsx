@@ -32,6 +32,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         onChange={onChange}
         color={color}
         disabled={disabled}
+        sx={{marginX: '-8px'}}
       />
     </Grid>
   );
