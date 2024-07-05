@@ -1,5 +1,5 @@
 import React from "react";
-import { Pagination as MuiPagination, Grid } from "@mui/material";
+import { Pagination, Grid } from "@mui/material";
 
 interface PaginationControlsProps {
   count: number;
@@ -26,7 +26,7 @@ const PaginationControls: React.FC<PaginationControlsProps> = ({
         marginTop: "20px",
       }}
     >
-      <MuiPagination
+      <Pagination
         count={count}
         page={page}
         onChange={onChange}
