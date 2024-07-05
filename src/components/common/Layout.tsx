@@ -8,7 +8,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <Container
-      style={{ maxWidth: "560px", paddingLeft: "8px", paddingRight: "8px" }}
+      style={{ maxWidth: "560px", paddingLeft: "4px", paddingRight: "4px" }}
     >
       {children}
     </Container>
