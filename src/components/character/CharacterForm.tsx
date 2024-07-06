@@ -6,8 +6,7 @@ import { db } from "@/db";
 import StringFormField from "@/components/common/form/StringFormField";
 import NumberFormField from "@/components/common/form/NumberFormField";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 interface CharacterFormProps {
   character: Character;
@@ -42,7 +41,6 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <ToastContainer />
       <StringFormField<Character> name="name" label="Name" control={control} />
       <NumberFormField<Character>
         name="height"
