@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
-import { db } from '../db';
-import { Character } from '../types/types';
-import { fetchCharacterById } from '../api/starWarsApi';
+import { useState, useEffect } from "react";
+import { db } from "../db";
+import { Character } from "../types/types";
+import { fetchCharacterById } from "../api/starWarsApi";
 
 const useFetchCharacter = (id: number) => {
   const [character, setCharacter] = useState<Character | null>(null);
@@ -19,11 +19,11 @@ const useFetchCharacter = (id: number) => {
           setCharacter(characterFromDb);
         } else {
           const characterFromApi = await fetchCharacterById(id);
-          setCharacter(characterFromApi);
+          setCharacter(characterFromApi as Character);
         }
       } catch (err) {
-        setError('An error occurred while fetching character data.');
-        console.error('Error fetching character:', err);
+        setError("An error occurred while fetching character data.");
+        console.error("Error fetching character:", err);
       } finally {
         setLoading(false);
       }

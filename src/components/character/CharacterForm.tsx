@@ -31,7 +31,6 @@ const CharacterForm: React.FC<CharacterFormProps> = ({
     } catch (err) {
       toast.error("Failed to save character.");
       console.error(err);
-      throw err;
     }
   };
 

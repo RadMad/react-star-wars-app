@@ -11,10 +11,17 @@ export interface Character {
   gender: string;
 }
 
-export interface CharacterResponse {
+export interface CharactersSuccessResponse {
   results: Character[];
   count: number;
 }
 
+export interface ErrorResponse {
+  error: unknown;
+}
 
-  
+export type CharacterSuccessResponse = Character;
+
+export type CharactersResponse = CharactersSuccessResponse | ErrorResponse;
+
+export type CharacterResponse = CharacterSuccessResponse | ErrorResponse;

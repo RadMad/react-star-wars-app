@@ -1,7 +1,7 @@
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { Typography } from "@mui/material";
 import { fetchCharacters } from "@/api/starWarsApi";
-import { CharacterResponse } from "@/types/types";
+import { CharactersResponse, CharactersSuccessResponse } from "@/types/types";
 import ErrorMessage from "@/components/common/ErrorMessage";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { useApiFetch } from "@/hooks/useApiFetch";
@@ -39,7 +39,7 @@ const HomePage: React.FC = () => {
     data: charactersData,
     loading,
     error,
-  } = useApiFetch<CharacterResponse>(
+  } = useApiFetch<CharactersResponse>(
     () => fetchCharacters(currentPage, debouncedSearchQuery),
     [currentPage, debouncedSearchQuery]
   );
@@ -96,12 +96,19 @@ const HomePage: React.FC = () => {
       {error && <ErrorMessage message={error} />}
       {!loading && (
         <>
-          {charactersData && charactersData.results.length > 0 ? (
+          {charactersData &&
+          (charactersData as CharactersSuccessResponse).results.length > 0 ? (
             <>
               <Suspense fallback={<LoadingSpinner />}>
-                <CharacterList characters={charactersData.results} />
+                <CharacterList
+                  characters={
+                    (charactersData as CharactersSuccessResponse).results
+                  }
+                />
                 <PaginationControls
-                  count={Math.ceil(charactersData.count / 10)}
+                  count={Math.ceil(
+                    (charactersData as CharactersSuccessResponse).count / 10
+                  )}
                   page={currentPage}
                   onChange={handlePageChange}
                   color="primary"

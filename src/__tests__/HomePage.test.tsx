@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi, Mock } from "vitest";
 import {
   render,
   screen,
@@ -9,7 +9,7 @@ import {
 import { MemoryRouter } from "react-router-dom";
 import HomePage from "@/pages/HomePage";
 import { fetchCharacters } from "@/api/starWarsApi";
-import { CharacterResponse } from "@/types/types";
+import { CharactersResponse } from "@/types/types";
 
 // Mock the fetchCharacters API call
 vi.mock("@/api/starWarsApi", () => ({
@@ -17,7 +17,7 @@ vi.mock("@/api/starWarsApi", () => ({
 }));
 
 describe("HomePage", () => {
-  const mockCharacters: CharacterResponse = {
+  const mockCharacters: CharactersResponse = {
     count: 1,
     results: [
       {
@@ -51,7 +51,7 @@ describe("HomePage", () => {
   });
 
   test("displays character data when fetched successfully", async () => {
-    (fetchCharacters as vi.Mock).mockResolvedValue(mockCharacters);
+    (fetchCharacters as Mock).mockResolvedValue(mockCharacters);
 
     await act(async () => {
       render(
@@ -67,7 +67,7 @@ describe("HomePage", () => {
   });
 
   test("displays no data message when no characters are found", async () => {
-    (fetchCharacters as vi.Mock).mockResolvedValue({ count: 0, results: [] });
+    (fetchCharacters as Mock).mockResolvedValue({ count: 0, results: [] });
 
     await act(async () => {
       render(
@@ -83,7 +83,7 @@ describe("HomePage", () => {
   });
 
   test("updates the search query", async () => {
-    (fetchCharacters as vi.Mock).mockResolvedValue(mockCharacters);
+    (fetchCharacters as Mock).mockResolvedValue(mockCharacters);
 
     await act(async () => {
       render(
@@ -102,7 +102,7 @@ describe("HomePage", () => {
   });
 
   test("displays loading spinner while fetching data", async () => {
-    (fetchCharacters as vi.Mock).mockReturnValue(new Promise(() => {}));
+    (fetchCharacters as Mock).mockReturnValue(new Promise(() => {}));
 
     await act(async () => {
       render(
@@ -116,7 +116,7 @@ describe("HomePage", () => {
   });
 
   test("displays error message if fetching data fails", async () => {
-    (fetchCharacters as vi.Mock).mockRejectedValue(
+    (fetchCharacters as Mock).mockRejectedValue(
       new Error("Failed to fetch")
     );
 
@@ -136,7 +136,7 @@ describe("HomePage", () => {
   });
 
   test("handles pagination correctly", async () => {
-    (fetchCharacters as vi.Mock).mockResolvedValue(mockCharacters);
+    (fetchCharacters as Mock).mockResolvedValue(mockCharacters);
 
     await act(async () => {
       render(
