@@ -58,6 +58,8 @@ npm run dev
 
 ### Production
 
+https://react-star-wars-app-olive.vercel.app/
+
 To build the project for production:
 
 ```sh
